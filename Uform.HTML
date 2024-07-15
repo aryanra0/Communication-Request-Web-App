@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Google Sheets User Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Style to change the background of the form */
+        #Request-Form {
+            background-color: #25477b; /* Dark blue background */
+            padding: 20px; /* Add padding to the form */
+            border-radius: 5px; /* Add rounded corners to the form */
+            color: #fff; /* Change text color to white for better readability */
+        }
+
+        /* Style overrides for form elements to maintain readability */
+        #Request-Form .form-control {
+            background-color: #fff; /* Light background for input fields */
+            color: #495057; /* Dark color for text inside input fields */
+        }
+
+        #Request-Form .form-text.text-muted {
+            color: #cfd5dc !important; /* Lighter text color for muted text */
+        }
+
+        #Request-Form label {
+            color: #fff; /* White color for labels */
+        }
+
+        #Request-Form a {
+            color: #ffd700; /* Gold color for links for visibility */
+        }
+
+        /* Styles for the neon button effect */
+        .neon-button {
+            position: relative;
+            padding: 10px 30px;
+            margin-top: 20px;
+            color: #fff;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            overflow: hidden;
+            transition: color 0.4s, box-shadow 0.4s;
+        }
+
+        .neon-button:hover {
+            box-shadow: 0 0 10px #2196f3, 0 0 40px #2196f3, 0 0 80px #2196f3;
+        }
+
+        .neon-button span {
+            position: absolute;
+            display: block;
+        }
+
+        .neon-button span:nth-child(1) {
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #2196f3);
+        }
+
+        .neon-button span:nth-child(2) {
+            top: -100%;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #2196f3);
+        }
+
+        .neon-button span:nth-child(3) {
+            bottom: 0;
+            right: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(270deg, transparent, #2196f3);
+        }
+
+        .neon-button span:nth-child(4) {
+            bottom: -100%;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(360deg, transparent, #2196f3);
+        }
+
+        .neon-button:hover span:nth-child(1) {
+            left: 100%;
+            transition: 1s;
+        }
+
+        .neon-button:hover span:nth-child(2) {
+            top: 100%;
+            transition: 1s;
+            transition-delay: 0.25s;
+        }
+
+        .neon-button:hover span:nth-child(3) {
+            right: 100%;
+            transition: 1s;
+            transition-delay: 0.5s;
+        }
+
+        .neon-button:hover span:nth-child(4) {
+            bottom: 100%;
+            transition: 1s;
+            transition-delay: 0.75s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1>Solutions Engineering Communication Request Form</h1>
+        <form id="Request-Form">
+            <div class="form-group">
+              <label for="formGroupExampleInput">Email Subject:</label>
+              <input type="text" class="form-control" id="EmailSubject" placeholder="Email Subject">                <small id="SmallSubject" class="form-text text-muted">Add the Subject for this email</small>
+            </div>
+            <div class="form-group">
+              <label for="formGroupExampleInput2">Email Body/Content:</label>
+              <input type="text" class="form-control" id="EmailBodyContent" placeholder="Email Body Content">
+              <small id="SmallSubject" class="form-text text-muted">Please provide the content/body for this email. If you want to add a hyperlink to a specific word, use the following format: [hyperlink: name-of-the-document].</small>
+            </div>
+            <div class="form-group">
+              <label for="formGroupExampleInput">Linked Resources:</label>
+              <input type="text" class="form-control" id="LinkedResources" placeholder="Linked Resources">
+              <small id="SmallSubject" class="form-text text-muted">Please provide the URLs for the additional resources or links mentioned in the email's content/body and ensure the minimum permission level is set to 'viewer'.</small>
+            </div>
+            <div class="form-group">
+              <label for="formGroupExampleInput2">Point of Contact (First & Last):</label>
+              <input type="text" class="form-control" id="PointofContact" placeholder="Point of Contact (First & Last)">
+              <small id="SmallSubject" class="form-text text-muted">Who is the point of contact responsible for this communication? (Please add their full name.)</small>
+            </div>
+            <div class="form-group">
+                <label for="date">Communication Date:</label>
+                <input type="date" class="form-control" id="date" required>
+                <small id="dateHelp" class="form-text text-muted">
+                    Please choose a date for when you would like it to be sent, keeping in mind that it should be at least one week in advance from today's date.
+                    Refer to the <a href="https://docs.google.com/spreadsheets/d/15M0qXBgrmz_E-m2g5PeGdgjj6EV7dkZVZe87U4VjDaA/edit#gid=1764287261" target="_blank">Communications Calendar</a> prior to selecting your date.
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="urgency">Priority/Urgency Level:</label>
+                <select class="form-control" id="urgency" required>
+                    <option value="">Select urgency level</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="time">Time:</label>
+                <input type="time" class="form-control" id="time">
+                <small id="timeHelp" class="form-text text-muted">[Optional] Choose the exact time at which you would like this communication to be sent.</small>
+            </div>
+            <div class="form-group">
+                <label for="requestType">Request Type:</label>
+                <select class="form-control" id="requestType" required>
+                    <option value="">Select request type</option>
+                    <option value="First request">First request</option>
+                    <option value="Follow up">Follow up</option>
+                </select>
+            </div>
+            <button type="button" class="neon-button" onclick="submitRequest()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Submit Request
+            </button>
+            <button type="button" id="UrgentRequest" class="btn btn-danger" style="display:none;" onclick="submitRequest(true)">Urgent Request</button>
+        </form>
+    </div>
+
+  <script>
+    function submitRequest(isUrgent) {
+      var emailSubject = document.getElementById('EmailSubject').value;
+      var emailBodyContent = document.getElementById('EmailBodyContent').value;
+      var linkedResources = document.getElementById('LinkedResources').value;
+      var pointOfContact = document.getElementById('PointofContact').value;
+      var date = document.getElementById('date').value;
+      var urgency = document.getElementById('urgency').value;
+      var time = document.getElementById('time').value;
+      var requestType = document.getElementById('requestType').value;
+
+      // Check if the new additional fields are filled along with the existing required fields
+      if (!emailSubject || !emailBodyContent || !linkedResources || !pointOfContact || !date || !urgency || !requestType) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      var formData = {
+        emailSubject: emailSubject,
+        emailBodyContent: emailBodyContent,
+        linkedResources: linkedResources,
+        pointOfContact: pointOfContact,
+        date: date, // YYYY-MM-DD format
+        time: time, // HH:MM format (24-hour clock)
+        urgency: urgency,
+        requestType: requestType,
+        isUrgent: !!isUrgent // Pass the urgency status
+      };
+
+      // Urgent requests bypass availability checks
+      if (isUrgent) {
+        // Call the server-side function to process the urgent request
+        google.script.run
+            .withSuccessHandler(function(response) {
+              handleResponse(response);
+              clearForm(); // Clear form after successful submission
+            })
+            .withFailureHandler(function(message) {
+              alert("Failed to process the urgent request: " + message);
+            })
+            .processUrgentRequest(formData);
+      } else {
+        // Call the server-side function to process the request
+        google.script.run
+          .withSuccessHandler(function(response) {
+            handleResponse(response);
+            clearForm(); // Clear form after successful submission
+          })
+          .withFailureHandler(function(message) {
+            alert("Failed to process the request: " + message);
+          })
+          .processEventRequest(formData);
+      }
+    }
+
+    // Clears all input fields in the form
+    function clearForm() {
+      var form = document.getElementById('Request-Form');
+      form.reset();
+
+      // If necessary, also reset any customized fields or UI states here
+      document.getElementById('UrgentRequest').style.display = 'none';
+      // Suppose we may have a div with id 'alternativeDays'
+      // We should ensure it's hidden again
+      var alternativeDays = document.getElementById('alternativeDays');
+      if (alternativeDays) {
+        alternativeDays.style.display = 'none';
+      }
+      
+      // Reset neon submit button to visible
+      document.getElementById('Request-Form').querySelector('.neon-button').style.display = 'inline';
+    }
+
+    function handleResponse(response) {
+      if (response.status === "success") {
+        alert(response.message);
+      } else if (response.status === "full") {
+        alert(response.message);
+
+        if (response.urgency === "High") {
+          document.getElementById('UrgentRequest').style.display = 'inline';
+          // Hide the submit button to prevent normal requests
+          document.getElementById('Request-Form').querySelector('.neon-button').style.display = 'none';
+        }
+
+        // Suppose we have a div with the id 'alternativeDays' for displaying alternative dates
+        document.getElementById('alternativeDays').style.display = 'block';
+        // Implement your logic to populate this area with UI elements for alternative days
+      }
+    }
+  </script>
+</body>
+
+<html>
